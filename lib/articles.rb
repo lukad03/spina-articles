@@ -1,4 +1,4 @@
-require "articles/engine"
+require "spina/articles/engine"
 
 module Articles
 end

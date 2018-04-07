@@ -1,3 +1,5 @@
+require "spina"
+
 module Spina
   module Articles
     class Engine < ::Rails::Engine

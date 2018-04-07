@@ -9,3 +9,6 @@ en:
       save: ! 'Save %{scaffold_name}'
       delete_confirmation: "Are you sure you want to delete <strong>%{subject}'s</strong> message?"
       empty: ! 'No %{scaffold_name} Yet'
+
+    photos:
+      delete: Photo deleted
