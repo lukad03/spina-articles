@@ -1,4 +1,6 @@
 require "spina/articles/engine"
 
-module Articles
+module Spina
+  module Articles
+  end
 end

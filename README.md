@@ -1,3 +1,4 @@
+[![Spina Articles Build Status](https://circleci.com/gh/lukad03/spina-articles.svg?style=svg)](https://circleci.com/gh/lukad03/spina-articles)
 ![Spina CMS](http://www.spinacms.com/spinacms.png)
 
 [Visit the website](http://www.spinacms.com)

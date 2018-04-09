@@ -1,0 +1,6 @@
+database:
+  override:
+    - RAILS_ENV=development
+test:
+  override:
+    - COVERAGE=true

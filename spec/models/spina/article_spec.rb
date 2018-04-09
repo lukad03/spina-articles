@@ -1,5 +1,5 @@
 require "rails_helper"
 
-describe Spina::Article do
+describe Spina::Articles::Article do
   it { should belong_to :photo }
 end

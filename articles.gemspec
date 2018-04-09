@@ -16,14 +16,14 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", ">= 5.0"
   s.add_runtime_dependency 'spina', '~> 0.11', '>= 0.11.1'
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'simplecov', '~> 0'
-  s.add_development_dependency 'rspec-rails', '~> 3.6'
+  s.add_development_dependency 'rspec-rails', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'factory_bot_rails', '~> 4.0'
-  s.add_development_dependency 'shoulda-matchers'
+  s.add_development_dependency 'shoulda-matchers', '~> 3.1'
   s.add_development_dependency 'pry-rails', '~> 0'
   s.add_development_dependency 'capybara-webkit'
+  s.add_development_dependency 'launchy'
 end

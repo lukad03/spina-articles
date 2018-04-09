@@ -7,17 +7,17 @@ module Spina
       layout "spina/admin/admin"
 
       def index
-        @articles = Article.order(publish_date: :desc)
+        @articles = Spina::Articles::Article.order(publish_date: :desc)
       end
 
       def new
         add_breadcrumb "New #{t('spina.articles.scaffold_name')}", spina.new_admin_article_path
-        @article = Spina::Article.new
+        @article = Spina::Articles::Article.new
       end
 
       def create
         add_breadcrumb "New #{t('spina.articles.scaffold_name')}"
-        @article = Spina::Article.new(article_params)
+        @article = Spina::Articles::Article.new(article_params)
         if @article.save
           redirect_to spina.admin_articles_url
         else
@@ -46,7 +46,7 @@ module Spina
       private
 
       def set_article
-        @article = Spina::Article.find(params[:id])
+        @article = Spina::Articles::Article.find(params[:id])
       end
 
       def set_breadcrumb

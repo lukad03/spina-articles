@@ -1,7 +1,5 @@
-require "spina"
-
 module Spina
   module Articles
-    VERSION = "0.0.2"
+    VERSION = "0.0.3"
   end
 end

@@ -1,4 +1,4 @@
-module Spina
+module Spina::Articles
   class Article < ActiveRecord::Base
     attr_accessor :old_materialized_path
 
@@ -37,7 +37,6 @@ module Spina
       self.class.where("id < ?", id).order("id DESC").first
     end
 
-
     private
 
     def set_slug
@@ -48,7 +47,7 @@ module Spina
     end
 
     def rewrite_rule
-      RewriteRule.create(old_path: old_materialized_path, new_path: materialized_path) if old_materialized_path != materialized_path
+      Spina::RewriteRule.create(old_path: old_materialized_path, new_path: materialized_path) if old_materialized_path != materialized_path
     end
   end
 end
