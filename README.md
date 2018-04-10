@@ -3,10 +3,12 @@
 [Visit the website](http://www.spinacms.com)
 
 [![Spina Articles Build Status](https://circleci.com/gh/lukad03/spina-articles.svg?style=svg)](https://circleci.com/gh/lukad03/spina-articles)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b0199ecbb559623aafb1/maintainability)](https://codeclimate.com/github/lukad03/spina-articles/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b0199ecbb559623aafb1/test_coverage)](https://codeclimate.com/github/lukad03/spina-articles/test_coverage)
 
 # Getting Started
 
-This is a News/Blog plugin for Spina CMS based on articles.
+This is a plugin for Spina CMS that adds Articles as a publishable content type.
 
 ```
 gem 'spina-articles'
