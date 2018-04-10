@@ -1,0 +1,52 @@
+version: 2.0
+jobs:
+  build:
+    working_directory: ~/spina-articles
+    environment:
+      CC_TEST_REPORTER_ID: 6966aacadf30d8510561ea6e70f85cbb934ba0a8e4edf28827c550a6669d7230
+      COVERAGE: true
+    docker:
+      - image: circleci/ruby:2.5-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: spina-articles
+      - image: postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: spina-articles
+          POSTGRES_DB: spina_articles_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        key: spina-articles-{{ checksum "Gemfile.lock" }}
+
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      # Cache Dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: spina-articles-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Setup the database
+      - run: bundle exec rake db:setup
+
+      # Setup Code Climdate Test Reporter
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
+
+      # Run the tests
+      - run: bundle exec rake
+
+      # Upload Test Coverage
+      - run: ./cc-test-reporter after-build

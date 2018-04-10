@@ -3083,3 +3083,180 @@ Completed 200 OK in 31ms (Views: 22.7ms | ActiveRecord: 1.8ms)
   [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (69.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_accounts" CASCADE[0m
+  [1m[35m (24.0ms)[0m  [1m[35mCREATE TABLE "spina_accounts" ("id" serial NOT NULL PRIMARY KEY, "name" character varying, "address" character varying, "postal_code" character varying, "city" character varying, "phone" character varying, "email" character varying, "preferences" text, "logo" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "kvk_identifier" character varying, "vat_identifier" character varying, "robots_allowed" boolean DEFAULT 'f')[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_articles" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "spina_articles" ("id" serial NOT NULL PRIMARY KEY, "title" character varying, "slug" character varying, "body" text, "teaser" text, "publish_date" date, "author" character varying, "draft" integer DEFAULT 1, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "photo_id" integer)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_attachment_collections" CASCADE[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "spina_attachment_collections" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_attachment_collections_attachments" CASCADE[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "spina_attachment_collections_attachments" ("id" serial NOT NULL PRIMARY KEY, "attachment_collection_id" integer, "attachment_id" integer)[0m
+  [1m[35m (7.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_attachments" CASCADE[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "spina_attachments" ("id" serial NOT NULL PRIMARY KEY, "file" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_layout_parts" CASCADE[0m
+  [1m[35m (15.3ms)[0m  [1m[35mCREATE TABLE "spina_layout_parts" ("id" serial NOT NULL PRIMARY KEY, "title" character varying, "name" character varying, "layout_partable_id" integer, "layout_partable_type" character varying, "created_at" timestamp, "updated_at" timestamp, "account_id" integer)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_line_translations" CASCADE[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE "spina_line_translations" ("id" serial NOT NULL PRIMARY KEY, "spina_line_id" integer NOT NULL, "locale" character varying NOT NULL, "content" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_spina_line_translations_on_locale" ON "spina_line_translations"  ("locale")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_spina_line_translations_on_spina_line_id" ON "spina_line_translations"  ("spina_line_id")[0m
+  [1m[35m (7.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_lines" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "spina_lines" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_media_folders" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "spina_media_folders" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_navigation_items" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "spina_navigation_items" ("id" serial NOT NULL PRIMARY KEY, "page_id" integer NOT NULL, "navigation_id" integer NOT NULL, "position" integer DEFAULT 0 NOT NULL, "ancestry" character varying, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_spina_navigation_items_on_page_id_and_navigation_id" ON "spina_navigation_items"  ("page_id", "navigation_id")[0m
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_navigations" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "spina_navigations" ("id" serial NOT NULL PRIMARY KEY, "name" character varying NOT NULL, "label" character varying NOT NULL, "auto_add_pages" boolean DEFAULT 'f' NOT NULL, "position" integer DEFAULT 0 NOT NULL, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_spina_navigations_on_name" ON "spina_navigations"  ("name")[0m
+  [1m[35m (7.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_options" CASCADE[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "spina_options" ("id" serial NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_page_parts" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "spina_page_parts" ("id" serial NOT NULL PRIMARY KEY, "title" character varying, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "page_id" integer, "page_partable_id" integer, "page_partable_type" character varying)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_page_translations" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "spina_page_translations" ("id" serial NOT NULL PRIMARY KEY, "spina_page_id" integer NOT NULL, "locale" character varying NOT NULL, "title" character varying, "menu_title" character varying, "description" character varying, "seo_title" character varying, "materialized_path" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_spina_page_translations_on_locale" ON "spina_page_translations"  ("locale")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_spina_page_translations_on_spina_page_id" ON "spina_page_translations"  ("spina_page_id")[0m
+  [1m[35m (12.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_pages" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "spina_pages" ("id" serial NOT NULL PRIMARY KEY, "show_in_menu" boolean DEFAULT 't', "slug" character varying, "deletable" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "skip_to_first_child" boolean DEFAULT 'f', "view_template" character varying, "layout_template" character varying, "draft" boolean DEFAULT 'f', "link_url" character varying, "ancestry" character varying, "position" integer, "active" boolean DEFAULT 't')[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_photo_collections" CASCADE[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "spina_photo_collections" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (14.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_photo_collections_photos" CASCADE[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "spina_photo_collections_photos" ("id" serial NOT NULL PRIMARY KEY, "photo_collection_id" integer, "photo_id" integer, "position" integer)[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_photos" CASCADE[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "spina_photos" ("id" serial NOT NULL PRIMARY KEY, "file" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "media_folder_id" integer)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_spina_photos_on_media_folder_id" ON "spina_photos"  ("media_folder_id")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_rewrite_rules" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "spina_rewrite_rules" ("id" serial NOT NULL PRIMARY KEY, "old_path" character varying, "new_path" character varying, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_settings" CASCADE[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "spina_settings" ("id" serial NOT NULL PRIMARY KEY, "plugin" character varying, "preferences" jsonb DEFAULT '{}', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_spina_settings_on_plugin" ON "spina_settings"  ("plugin")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_structure_items" CASCADE[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "spina_structure_items" ("id" serial NOT NULL PRIMARY KEY, "structure_id" integer, "position" integer, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_spina_structure_items_on_structure_id" ON "spina_structure_items"  ("structure_id")[0m
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_structure_parts" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "spina_structure_parts" ("id" serial NOT NULL PRIMARY KEY, "structure_item_id" integer, "structure_partable_id" integer, "structure_partable_type" character varying, "name" character varying, "title" character varying, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_spina_structure_parts_on_structure_item_id" ON "spina_structure_parts"  ("structure_item_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_spina_structure_parts_on_structure_partable_id" ON "spina_structure_parts"  ("structure_partable_id")[0m
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_structures" CASCADE[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "spina_structures" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_text_translations" CASCADE[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "spina_text_translations" ("id" serial NOT NULL PRIMARY KEY, "spina_text_id" integer NOT NULL, "locale" character varying NOT NULL, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_spina_text_translations_on_locale" ON "spina_text_translations"  ("locale")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_spina_text_translations_on_spina_text_id" ON "spina_text_translations"  ("spina_text_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_texts" CASCADE[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "spina_texts" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "spina_users" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "spina_users" ("id" serial NOT NULL PRIMARY KEY, "name" character varying, "email" character varying, "password_digest" character varying, "admin" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "last_logged_in" timestamp, "password_reset_token" character varying, "password_reset_sent_at" timestamp)[0m
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_articles" WHERE "spina_articles"."slug" = $1 AND ("spina_articles"."id" IS NOT NULL)[0m  [["slug", "article-title-1"]]
+  [1m[36mSpina::Articles::Article Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" WHERE "spina_articles"."slug" = $1 LIMIT $2[0m  [["slug", "article-title-1"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "spina_articles" ("title", "slug", "body", "publish_date", "author", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Article Title 1"], ["slug", "article-title-1"], ["body", "Cool beans."], ["publish_date", "2018-04-10"], ["author", "John Doe"], ["created_at", "2018-04-10 14:05:15.547218"], ["updated_at", "2018-04-10 14:05:15.547218"]]
+  [1m[36mSpina::RewriteRule Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" = $1 LIMIT $2[0m  [["old_path", "/news/"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "spina_rewrite_rules" ("old_path", "new_path", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["old_path", "/news/"], ["new_path", "/news/article-title-1"], ["created_at", "2018-04-10 14:05:15.567040"], ["updated_at", "2018-04-10 14:05:15.567040"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_articles" WHERE "spina_articles"."slug" = $1 AND ("spina_articles"."id" IS NOT NULL)[0m  [["slug", "article-title-2"]]
+  [1m[36mSpina::Articles::Article Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" WHERE "spina_articles"."slug" = $1 LIMIT $2[0m  [["slug", "article-title-2"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "spina_articles" ("title", "slug", "body", "publish_date", "author", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Article Title 2"], ["slug", "article-title-2"], ["body", "Cool beans."], ["publish_date", "2018-04-10"], ["author", "John Doe"], ["created_at", "2018-04-10 14:05:15.572457"], ["updated_at", "2018-04-10 14:05:15.572457"]]
+  [1m[36mSpina::RewriteRule Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" = $1 LIMIT $2[0m  [["old_path", "/news/"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_articles" WHERE "spina_articles"."slug" = $1 AND ("spina_articles"."id" IS NOT NULL)[0m  [["slug", "article-title-3"]]
+  [1m[36mSpina::Articles::Article Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" WHERE "spina_articles"."slug" = $1 LIMIT $2[0m  [["slug", "article-title-3"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "spina_articles" ("title", "slug", "body", "publish_date", "author", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Article Title 3"], ["slug", "article-title-3"], ["body", "Cool beans."], ["publish_date", "2018-04-10"], ["author", "John Doe"], ["created_at", "2018-04-10 14:05:15.580842"], ["updated_at", "2018-04-10 14:05:15.580842"]]
+  [1m[36mSpina::RewriteRule Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" = $1 LIMIT $2[0m  [["old_path", "/news/"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_articles" WHERE "spina_articles"."slug" = $1 AND ("spina_articles"."id" IS NOT NULL)[0m  [["slug", "article-title-4"]]
+  [1m[36mSpina::Articles::Article Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" WHERE "spina_articles"."slug" = $1 LIMIT $2[0m  [["slug", "article-title-4"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "spina_articles" ("title", "slug", "body", "publish_date", "author", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Article Title 4"], ["slug", "article-title-4"], ["body", "Cool beans."], ["publish_date", "2018-04-10"], ["author", "John Doe"], ["created_at", "2018-04-10 14:05:15.587303"], ["updated_at", "2018-04-10 14:05:15.587303"]]
+  [1m[36mSpina::RewriteRule Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" = $1 LIMIT $2[0m  [["old_path", "/news/"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_articles" WHERE "spina_articles"."slug" = $1 AND ("spina_articles"."id" IS NOT NULL)[0m  [["slug", "article-title-5"]]
+  [1m[36mSpina::Articles::Article Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" WHERE "spina_articles"."slug" = $1 LIMIT $2[0m  [["slug", "article-title-5"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "spina_articles" ("title", "slug", "body", "publish_date", "author", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Article Title 5"], ["slug", "article-title-5"], ["body", "Cool beans."], ["publish_date", "2018-04-10"], ["author", "John Doe"], ["created_at", "2018-04-10 14:05:15.594027"], ["updated_at", "2018-04-10 14:05:15.594027"]]
+  [1m[36mSpina::RewriteRule Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" = $1 LIMIT $2[0m  [["old_path", "/news/"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSpina::User Exists (1.1ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_users" WHERE "spina_users"."email" = $1 LIMIT $2[0m  [["email", "john@doe.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "spina_users" ("name", "email", "password_digest", "admin", "created_at", "updated_at", "password_reset_token") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john@doe.com"], ["password_digest", "$2a$04$aiLnJW3ysyzUzv58/jZprOH1SDdnu2.sKLUd1zklP5Nyp.SA1AdmC"], ["admin", "t"], ["created_at", "2018-04-10 14:05:15.622835"], ["updated_at", "2018-04-10 14:05:15.622835"], ["password_reset_token", "wbsFdaigAzNwnEav6rQ7Nej7"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "spina_accounts" ("name", "preferences", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "My Website"], ["preferences", "---\n:theme: default\n"], ["created_at", "2018-04-10 14:05:15.658925"], ["updated_at", "2018-04-10 14:05:15.658925"]]
+  [1m[36mSpina::Page Load (0.4ms)[0m  [1m[34mSELECT  "spina_pages"."id", "spina_pages"."show_in_menu", "spina_pages"."slug", "spina_pages"."deletable", "spina_pages"."created_at", "spina_pages"."updated_at", "spina_pages"."name", "spina_pages"."skip_to_first_child", "spina_pages"."view_template", "spina_pages"."layout_template", "spina_pages"."draft", "spina_pages"."link_url", "spina_pages"."ancestry", "spina_pages"."position", "spina_pages"."active" FROM "spina_pages" WHERE "spina_pages"."name" = $1 ORDER BY "spina_pages"."id" ASC LIMIT $2[0m  [["name", "homepage"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_pages" INNER JOIN "spina_page_translations" ON "spina_page_translations"."spina_page_id" = "spina_pages"."id" WHERE "spina_pages"."name" = $1 AND "spina_page_translations"."materialized_path" = $2 AND "spina_page_translations"."locale" = $3 AND ("spina_pages"."id" IS NOT NULL)[0m  [["name", "homepage"], ["materialized_path", "/"], ["locale", "en"]]
+  [1m[36mSpina::Page::Translation Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_page_translations" WHERE "spina_page_translations"."materialized_path" = $1 AND "spina_page_translations"."locale" = $2 LIMIT $3[0m  [["materialized_path", "/"], ["locale", "en"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "spina_pages" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2018-04-10 14:05:15.742984"], ["updated_at", "2018-04-10 14:05:15.742984"], ["name", "homepage"]]
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "spina_page_translations" ("spina_page_id", "locale", "title", "materialized_path", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["spina_page_id", 1], ["locale", "en"], ["title", "Homepage"], ["materialized_path", "/"], ["created_at", "2018-04-10 14:05:15.744689"], ["updated_at", "2018-04-10 14:05:15.744689"]]
+  [1m[36mSpina::Page Load (0.3ms)[0m  [1m[34mSELECT "spina_pages"."id", "spina_pages"."show_in_menu", "spina_pages"."slug", "spina_pages"."deletable", "spina_pages"."created_at", "spina_pages"."updated_at", "spina_pages"."name", "spina_pages"."skip_to_first_child", "spina_pages"."view_template", "spina_pages"."layout_template", "spina_pages"."draft", "spina_pages"."link_url", "spina_pages"."ancestry", "spina_pages"."position", "spina_pages"."active" FROM "spina_pages" WHERE "spina_pages"."name" = $1 AND "spina_pages"."ancestry" = '1'[0m  [["name", "homepage"]]
+  [1m[36mSpina::RewriteRule Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_rewrite_rules" WHERE "spina_rewrite_rules"."old_path" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "spina_rewrite_rules" ("new_path", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["new_path", "/"], ["created_at", "2018-04-10 14:05:15.749397"], ["updated_at", "2018-04-10 14:05:15.749397"]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "spina_pages" INNER JOIN "spina_page_translations" ON "spina_page_translations"."spina_page_id" = "spina_pages"."id" WHERE "spina_page_translations"."materialized_path" = $1 AND "spina_page_translations"."locale" = $2 AND ("spina_pages"."id" != $3)[0m  [["materialized_path", "/"], ["locale", "en"], ["id", 1]]
+  [1m[36mSpina::Page::Translation Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_page_translations" WHERE "spina_page_translations"."materialized_path" = $1 AND "spina_page_translations"."locale" = $2 AND ("spina_page_translations"."spina_page_id" != $3) LIMIT $4[0m  [["materialized_path", "/"], ["locale", "en"], ["spina_page_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "spina_pages" SET "deletable" = $1, "updated_at" = $2, "view_template" = $3 WHERE "spina_pages"."id" = $4[0m  [["deletable", "f"], ["updated_at", "2018-04-10 14:05:15.753553"], ["view_template", "homepage"], ["id", 1]]
+  [1m[36mSpina::Page Load (0.3ms)[0m  [1m[34mSELECT "spina_pages"."id", "spina_pages"."show_in_menu", "spina_pages"."slug", "spina_pages"."deletable", "spina_pages"."created_at", "spina_pages"."updated_at", "spina_pages"."name", "spina_pages"."skip_to_first_child", "spina_pages"."view_template", "spina_pages"."layout_template", "spina_pages"."draft", "spina_pages"."link_url", "spina_pages"."ancestry", "spina_pages"."position", "spina_pages"."active" FROM "spina_pages" WHERE "spina_pages"."ancestry" = '1'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "spina_pages" SET "active" = 'f' WHERE "spina_pages"."active" = $1 AND ("spina_pages"."view_template" NOT IN ('homepage', 'show'))[0m  [["active", "t"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "spina_pages" SET "active" = 't' WHERE "spina_pages"."active" = $1 AND "spina_pages"."view_template" IN ('homepage', 'show')[0m  [["active", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/admin/login" for 127.0.0.1 at 2018-04-10 10:05:15 -0400
+Processing by Spina::Admin::SessionsController#new as HTML
+  Rendering /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/sessions/new.html.haml within layouts/spina/login
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/sessions/new.html.haml within layouts/spina/login (312.9ms)
+Completed 200 OK in 347ms (Views: 330.7ms | ActiveRecord: 0.0ms)
+Started POST "/admin/sessions" for 127.0.0.1 at 2018-04-10 10:05:16 -0400
+Processing by Spina::Admin::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "email"=>"john@doe.com", "password"=>"[FILTERED]", "button"=>""}
+  [1m[36mSpina::User Load (0.6ms)[0m  [1m[34mSELECT  "spina_users".* FROM "spina_users" WHERE "spina_users"."email" = $1 ORDER BY "spina_users"."id" ASC LIMIT $2[0m  [["email", "john@doe.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "spina_users" SET "last_logged_in" = $1, "updated_at" = $2 WHERE "spina_users"."id" = $3[0m  [["last_logged_in", "2018-04-10 14:05:16.151254"], ["updated_at", "2018-04-10 14:05:16.151886"], ["id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/admin
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+Started GET "/admin" for 127.0.0.1 at 2018-04-10 10:05:16 -0400
+Processing by Spina::Admin::PagesController#index as HTML
+  [1m[36mSpina::User Load (0.4ms)[0m  [1m[34mSELECT  "spina_users".* FROM "spina_users" WHERE "spina_users"."id" = $1 ORDER BY "spina_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://www.example.com/admin/pages
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+Started GET "/admin/pages" for 127.0.0.1 at 2018-04-10 10:05:16 -0400
+Processing by Spina::Admin::PagesController#index as HTML
+  [1m[36mSpina::User Load (0.3ms)[0m  [1m[34mSELECT  "spina_users".* FROM "spina_users" WHERE "spina_users"."id" = $1 ORDER BY "spina_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/pages/index.html.haml within layouts/spina/admin/pages
+  [1m[36mSpina::Account Load (0.5ms)[0m  [1m[34mSELECT  "spina_accounts".* FROM "spina_accounts" ORDER BY "spina_accounts"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSpina::Page Load (0.4ms)[0m  [1m[34mSELECT "spina_pages"."id", "spina_pages"."show_in_menu", "spina_pages"."slug", "spina_pages"."deletable", "spina_pages"."created_at", "spina_pages"."updated_at", "spina_pages"."name", "spina_pages"."skip_to_first_child", "spina_pages"."view_template", "spina_pages"."layout_template", "spina_pages"."draft", "spina_pages"."link_url", "spina_pages"."ancestry", "spina_pages"."position", "spina_pages"."active" FROM "spina_pages" WHERE "spina_pages"."active" = $1 AND "spina_pages"."ancestry" IS NULL AND "spina_pages"."ancestry" IS NULL ORDER BY "spina_pages"."position" ASC[0m  [["active", "t"]]
+  [1m[36mSpina::Page::Translation Load (0.3ms)[0m  [1m[34mSELECT "spina_page_translations".* FROM "spina_page_translations" WHERE "spina_page_translations"."spina_page_id" = $1[0m  [["spina_page_id", 1]]
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/pages/_page.html.haml (7.0ms)
+  [1m[36mSpina::Page Load (0.7ms)[0m  [1m[34mSELECT "spina_pages"."id", "spina_pages"."show_in_menu", "spina_pages"."slug", "spina_pages"."deletable", "spina_pages"."created_at", "spina_pages"."updated_at", "spina_pages"."name", "spina_pages"."skip_to_first_child", "spina_pages"."view_template", "spina_pages"."layout_template", "spina_pages"."draft", "spina_pages"."link_url", "spina_pages"."ancestry", "spina_pages"."position", "spina_pages"."active" FROM "spina_pages" WHERE "spina_pages"."ancestry" = '1' AND "spina_pages"."active" = $1[0m  [["active", "t"]]
+  Rendered collection of /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/pages/_page_nested_list.html.haml [1 times] (17.4ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/pages/index.html.haml within layouts/spina/admin/pages (34.1ms)
+  [1m[36mSpina::Navigation Load (0.5ms)[0m  [1m[34mSELECT "spina_navigations".* FROM "spina_navigations" ORDER BY "spina_navigations"."position" ASC[0m
+  Rendering /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/layouts/spina/admin/admin.html.haml
+  Rendered /Users/lukekeller/workspace/spina-articles/app/views/spina/admin/hooks/articles/_website_secondary_navigation.html.haml (2.0ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/shared/_primary_navigation.html.haml (36.2ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/shared/_notifications.html.haml (6.2ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/layouts/spina/admin/admin.html.haml (69.1ms)
+Completed 200 OK in 137ms (Views: 123.4ms | ActiveRecord: 3.9ms)
+Started GET "/admin/articles" for 127.0.0.1 at 2018-04-10 10:05:16 -0400
+Processing by Spina::Admin::ArticlesController#index as HTML
+  [1m[36mSpina::User Load (0.4ms)[0m  [1m[34mSELECT  "spina_users".* FROM "spina_users" WHERE "spina_users"."id" = $1 ORDER BY "spina_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/lukekeller/workspace/spina-articles/app/views/spina/admin/articles/index.html.haml within layouts/spina/admin/admin
+  [1m[36mSpina::Account Load (0.5ms)[0m  [1m[34mSELECT  "spina_accounts".* FROM "spina_accounts" ORDER BY "spina_accounts"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSpina::Articles::Article Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "spina_articles" LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSpina::Articles::Article Load (0.5ms)[0m  [1m[34mSELECT "spina_articles".* FROM "spina_articles" ORDER BY "spina_articles"."publish_date" DESC[0m
+  Rendered collection of /Users/lukekeller/workspace/spina-articles/app/views/spina/admin/articles/_article.html.haml [5 times] (5.8ms)
+  Rendered /Users/lukekeller/workspace/spina-articles/app/views/spina/admin/articles/index.html.haml within layouts/spina/admin/admin (17.9ms)
+  Rendered /Users/lukekeller/workspace/spina-articles/app/views/spina/admin/hooks/articles/_website_secondary_navigation.html.haml (0.3ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/shared/_primary_navigation.html.haml (2.8ms)
+  Rendered /Users/lukekeller/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/spina-0.12.0/app/views/spina/admin/shared/_notifications.html.haml (0.1ms)
+Completed 200 OK in 30ms (Views: 22.6ms | ActiveRecord: 1.7ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m

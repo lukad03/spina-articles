@@ -1,4 +1,8 @@
-# http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+if ENV.fetch("COVERAGE", false)
+  require "simplecov"
+  SimpleCov.start "rails"
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.syntax = :expect
