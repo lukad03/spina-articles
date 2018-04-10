@@ -1,5 +1,6 @@
 !.keep
 *.DS_Store
+*.log
 *.swo
 *.swp
 .byebug_history
