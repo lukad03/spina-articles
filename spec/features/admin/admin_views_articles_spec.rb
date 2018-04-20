@@ -10,7 +10,6 @@ feature "User visits Article index" do
     visit "/admin/articles"
 
     within("div#pages_list") do
-      save_and_open_page
       expect(page).to have_selector("li", count: 5)
     end
   end
